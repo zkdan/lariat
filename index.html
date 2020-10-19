@@ -4,13 +4,124 @@
 	<meta charset="UTF-8">
 	<title>lariat.work</title>
 	<style>
-		body{
-			background-image:url('./images/hanging-lariat-1.jpg');
-			background-position-x: 50%;
+		img{
+			max-width: 100%;
 		}
+		main{
+			display: flex;
+			flex-direction:column;
+			align-items:center;
+		}
+		ul{
+			display:flex;
+			margin: 0;
+			padding: 0;
+			justify-content: space-between;
+			width: 80%;
+		}
+		ul li{
+			border: 1px solid black;
+			list-style-type: none;
+			position: relative;
+			overflow: hidden;
+			flex-grow: 1;
+			text-align: center;
+			padding: 10px;
+		}
+		ul li input[type=radio] {
+		height: 200%;
+		width: 233%;
+		position: absolute;
+		left: -83%;
+		top: -60%;
+		opacity:0;
+		}
+		.gallery {
+			width: 80%;
+			display:flex;
+			flex-wrap:wrap;
+		}
+		.gallery > img{
+			width: 50%;
+		}
+		input[type=radio]:checked ~ label{
+			color: lime;
+		}
+/* #radio-2015,
+#radio-2016,
+#radio-2017,
+#radio-2018,
+#radio-2019,
+#radio-2020{
+	opacity:0;
+}
+ */
 	</style>
 </head>
 <body>
-	<h1> sup</h1>
+	<main>
+		<ul class="years"></ul>
+		<div class="gallery">
+
+		</div>
+	</main>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+	integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+	crossorigin="anonymous"></script>
+
+ <script>
+	const app ={};
+	app.monthYears = []
+	app.calendarImages = { 
+		2015: [03, 04, 05, 06, 07, 08, 09, 10],
+		2016: [01, 02, 03, 04, 06, 07, 08, 09, 10, 11, 12],
+		2017: [01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12],
+		2018: [01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11],
+		2019: [01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12],
+		2020: [01, 02, 03, 04, 05, 08, 09, 10, 11, 12]
+ }
+	app.months = [01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12]
+	app.years = [2015, 2016, 2017, 2018, 2019, 2020]
+	app.selectedYear = null;
+	
+	app.chooseYear = (curr, next)=>{
+		 	if (curr != next) {
+			 app.selectedYear = next;
+		 }
+		 app.showSelectedOnly(app.selectedYear)
+	 }
+		app.addListeners = () => $('input[type=radio]').on('click', function(){
+		 let chosen = $(this).val();
+		app.selectedYear = chosen;
+		app.showSelectedOnly(app.selectedYear);
+	 });
+	 app.showSelectedOnly = ( year )=> {
+		 const imagePaths =[];
+			 const cc = app.calendarImages[year].map(month =>{
+				 if (month <10) {
+					 month = `0${month}`
+				 }
+				 	return `<img class=${month}-${year} src="images/${year}/${month}-${year}.jpg" />`;
+			 });
+
+			 $(".gallery").empty().append(cc)
+		 };
+
+		app.makeMenu = () => app.years.forEach(year => {
+			const button = `<li>
+			    <input type='radio' id='radio-${year}' name='year' value=${ year } >
+    <label for=${year}>${year}</label></li>
+			`
+				$(".years").append(button);
+			});
+		app.init = () => {
+			app.makeMenu();
+			app.addListeners();
+		}
+	
+			$(function(){
+		app.init();
+	})
+ </script>
 </body>
 </html>
