@@ -42,25 +42,20 @@
 			flex-wrap:wrap;
 		}
 		.gallery > img{
-			width: 50%;
+			width: calc(50% - 20px);
+			margin:10px;
 		}
-		input[type=radio]:checked ~ label{
-			color: lime;
+		@media all and (max-width: 600px){
+			.gallery > img{
+				width: 100%;
+			}
 		}
-/* #radio-2015,
-#radio-2016,
-#radio-2017,
-#radio-2018,
-#radio-2019,
-#radio-2020{
-	opacity:0;
-}
- */
+		
 	</style>
 </head>
 <body>
 	<main>
-		<ul class="years"></ul>
+		<ul class="menu"></ul>
 		<div class="gallery">
 
 		</div>
@@ -85,17 +80,28 @@
 	app.years = [2015, 2016, 2017, 2018, 2019, 2020]
 	app.selectedYear = null;
 	
-	app.chooseYear = (curr, next)=>{
-		 	if (curr != next) {
-			 app.selectedYear = next;
-		 }
-		 app.showSelectedOnly(app.selectedYear)
+	 app.addListenersListItems = ()=>{
+		 $('li').on('click', function(){
+			 let chosen = $(this).attr('id');
+			 app.changeYear(chosen);
+		 });
+
+		 $('li').on('keypress', function(event){
+				if(event.charCode === 13){
+					app.changeYear(event.target.id);
+				}
+		 });
 	 }
-		app.addListeners = () => $('input[type=radio]').on('click', function(){
-		 let chosen = $(this).val();
-		app.selectedYear = chosen;
-		app.showSelectedOnly(app.selectedYear);
-	 });
+	
+	app.changeYear =( newYear) =>{
+		if (newYear !== app.selectedYear){
+			app.selectedYear = newYear;
+			app.showSelectedOnly(app.selectedYear);
+						$(`li`).css('color', 'black');
+
+			$(`li#${app.selectedYear}`).css('color', 'lime');
+		}
+	}
 	 app.showSelectedOnly = ( year )=> {
 		 const imagePaths =[];
 			 const cc = app.calendarImages[year].map(month =>{
@@ -105,19 +111,17 @@
 				 	return `<img class=${month}-${year} src="images/${year}/${month}-${year}.jpg" />`;
 			 });
 
-			 $(".gallery").empty().append(cc)
+			 $(".gallery").empty().append(cc);
 		 };
 
 		app.makeMenu = () => app.years.forEach(year => {
-			const button = `<li>
-			    <input type='radio' id='radio-${year}' name='year' value=${ year } >
-    <label for=${year}>${year}</label></li>
-			`
-				$(".years").append(button);
+			const button = `<li id=${year} tabindex='1'>
+			${year}</li>`
+				$(".menu").append(button);
 			});
 		app.init = () => {
 			app.makeMenu();
-			app.addListeners();
+			app.addListenersListItems();
 		}
 	
 			$(function(){
