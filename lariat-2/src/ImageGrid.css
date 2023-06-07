@@ -1,0 +1,15 @@
+section{
+  margin:0 auto;
+  width:80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border:1px solid red;
+}
+section .imageCard{
+  width: 23%;
+  margin:0 1%;
+}
+.imageCard img {
+  max-width:100%;
+}
