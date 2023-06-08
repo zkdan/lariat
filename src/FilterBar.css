@@ -1,7 +1,18 @@
+.filterYears{
+  display: flex;
+  margin:0 auto;
+  width: 100%;
+  justify-content:space-around;
+  background: linear-gradient(90deg, rgba(34,193,195,.5) 0%, rgba(253,187,45,.5) 100%); 
+  padding: 1% 0;
+}   
+
 .filterYears button{
-  background-color: lightblue;
-  transition:.2s;
+  background-color:transparent;
+  transition:.3s;
+  padding:1rem;
+  border:none;
 }
 .filterYears button.selected{
-  background-color: aqua;
+  border:1px solid black;
 }

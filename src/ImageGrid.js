@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useReducer } from "react";
 import ImageCard from "./ImageCard";
 import FilterBar from "./FilterBar";
 import getMonth from "./utils.js"
@@ -10,6 +10,7 @@ const  ImageGrid = () =>{
   const [allYears, setAllYears] = useState([]);
   const [chosenYear, chooseYear] = useState([]);
   const [filteredPhotos, setFilteredPhotos] = useState([]);
+
   const getAllYears = (data) => {
     const years = new Set();
     data.forEach(item=>{
@@ -41,15 +42,20 @@ const  ImageGrid = () =>{
       });
       setAllPhotos(data);
       getAllYears(data);
-      chooseYear(null);
+      chooseYear('');
       setFilteredPhotos(data);
     });
   },[]);
   useEffect(()=>{
-    const filtered = allPhotos.filter(photo=>{
-      return photo.year === chosenYear;
-    });
-    setFilteredPhotos(filtered);
+
+    if(chosenYear === ''){
+      setFilteredPhotos(allPhotos);
+    } else {
+      const filtered = allPhotos.filter(photo=>{
+        return photo.year === chosenYear;
+      });
+      setFilteredPhotos(filtered);
+    }
   },[chosenYear]);
 
 

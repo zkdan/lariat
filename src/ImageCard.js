@@ -1,8 +1,8 @@
 const ImageCard =({cardInfo})=>{
-  const {month, imageUrl, name} = cardInfo;
+  const {month, imageUrl, name, year} = cardInfo;
 return(
   <div className="imageCard" tabIndex={1}>
-    <p>{month}</p>
+    <p>{month} {year}</p>
     <img src={imageUrl} alt={name} />
   </div>
 )
