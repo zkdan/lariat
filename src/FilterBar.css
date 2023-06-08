@@ -8,10 +8,10 @@
 }   
 
 .filterYears button{
+  border:1px solid transparent;
   background-color:transparent;
-  transition:.3s;
+  transition: ease-in-out .3s;
   padding:1rem;
-  border:none;
 }
 .filterYears button.selected{
   border:1px solid black;
