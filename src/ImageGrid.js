@@ -1,5 +1,5 @@
 
-import { useEffect, useState, useReducer } from "react";
+import { useEffect, useState } from "react";
 import ImageCard from "./ImageCard";
 import FilterBar from "./FilterBar";
 import getMonth from "./utils.js"
