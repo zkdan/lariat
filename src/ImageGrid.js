@@ -1,10 +1,13 @@
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useReducer } from "react";
 import ImageCard from "./ImageCard";
 import FilterBar from "./FilterBar";
 import getMonth from "./utils.js"
 import "./ImageGrid.css";
 
+const reducer =(state, action)=>{
+  console.log(state, action)
+}
 const  ImageGrid = () =>{
   const [allPhotos, setAllPhotos] = useState([]);
   const [allYears, setAllYears] = useState([]);
@@ -12,12 +15,13 @@ const  ImageGrid = () =>{
   const [filteredPhotos, setFilteredPhotos] = useState([]);
 
   const getAllYears = (data) => {
-    const years = new Set();
+    let years = new Set();
     data.forEach(item=>{
       years.add(item.year);
     })
+    years = Array.from(years);
     setAllYears(years);
-    setFilteredPhotos([]);
+    setFilteredPhotos({filteredPhotos:[]});
   }
 
   useEffect(()=>{
@@ -40,27 +44,39 @@ const  ImageGrid = () =>{
         }
         return photoSpecs;
       });
-      setAllPhotos(data);
+      setAllPhotos({allPhotos:data});
       getAllYears(data);
-      chooseYear('');
+      chooseYear({year:''});
       setFilteredPhotos(data);
     });
   },[]);
-  useEffect(()=>{
+  // useEffect(()=>{
+  //   if(chosenYear === ''){
+  //     setFilteredPhotos(allPhotos);
+  //   } else {
+  //     const filtered = allPhotos.filter(photo=>{
+  //       return photo.year === chosenYear;
+  //     });
+  //     setFilteredPhotos(filtered);
+  //   }
+  // },[chosenYear]);
 
-    if(chosenYear === ''){
-      setFilteredPhotos(allPhotos);
-    } else {
-      const filtered = allPhotos.filter(photo=>{
-        return photo.year === chosenYear;
-      });
-      setFilteredPhotos(filtered);
-    }
-  },[chosenYear]);
+  const [state,dispatch] = useReducer(reducer, []);
 
-
+  const handleUpdateMonth =(e)=>{
+    const val = e.target.textContent;
+    console.log(val)
+    dispatch({
+      month:val
+    })
+  }
   return(
     <main>
+      <ul>
+        <li onClick={handleUpdateMonth}>Mar</li>
+        <li onClick={handleUpdateMonth}>Jun</li>
+        <li onClick={handleUpdateMonth}>Aug</li>
+      </ul>
       <FilterBar allYears ={allYears} chooseYear={chooseYear} chosenYear={chosenYear}/>
       <section>
         {filteredPhotos.map(photo => {
