@@ -3,7 +3,6 @@ section{
   width:80%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
 }
 section .imageCard{
   width: 23%;

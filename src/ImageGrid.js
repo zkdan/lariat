@@ -1,17 +1,18 @@
 
-import { useEffect, useState, useReducer } from "react";
+import { useEffect, useState } from "react";
 import ImageCard from "./ImageCard";
-import FilterBar from "./FilterBar";
+import Filter from "./Filter";
 import getMonth from "./utils.js"
 import "./ImageGrid.css";
 
-const reducer =(state, action)=>{
-  console.log(state, action)
-}
+const monthFilters = ['cover', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+// const months = ['01','02','04','05','06','07','08','09','10','11','12'];
 const  ImageGrid = () =>{
   const [allPhotos, setAllPhotos] = useState([]);
   const [allYears, setAllYears] = useState([]);
-  const [chosenYear, chooseYear] = useState([]);
+  const [year, setYear] = useState('all');
+  const [month, setMonth] = useState([]);
   const [filteredPhotos, setFilteredPhotos] = useState([]);
 
   const getAllYears = (data) => {
@@ -20,8 +21,9 @@ const  ImageGrid = () =>{
       years.add(item.year);
     })
     years = Array.from(years);
+    years.unshift('all')
     setAllYears(years);
-    setFilteredPhotos({filteredPhotos:[]});
+    setFilteredPhotos([]);
   }
 
   useEffect(()=>{
@@ -44,43 +46,47 @@ const  ImageGrid = () =>{
         }
         return photoSpecs;
       });
-      setAllPhotos({allPhotos:data});
+      setAllPhotos(data);
       getAllYears(data);
-      chooseYear({year:''});
       setFilteredPhotos(data);
     });
   },[]);
-  // useEffect(()=>{
-  //   if(chosenYear === ''){
-  //     setFilteredPhotos(allPhotos);
-  //   } else {
-  //     const filtered = allPhotos.filter(photo=>{
-  //       return photo.year === chosenYear;
-  //     });
-  //     setFilteredPhotos(filtered);
-  //   }
-  // },[chosenYear]);
 
-  const [state,dispatch] = useReducer(reducer, []);
-
-  const handleUpdateMonth =(e)=>{
-    const val = e.target.textContent;
-    console.log(val)
-    dispatch({
-      month:val
-    })
+  const handleUpdateYear = (year)=>{
+    console.log(year)
+    setMonth('all');
+    setYear(year);
+    const updated =  allPhotos.filter(photo => {
+      return photo.year === year
+    });
+    setFilteredPhotos(updated);
   }
+  const handleUpdateMonth =(month)=>{
+    setYear('all');
+    setMonth(month);
+    const updated =  allPhotos.filter(photo => {
+      return photo.month === month
+    });
+    setFilteredPhotos(updated);
+  }
+
   return(
     <main>
-      <ul>
-        <li onClick={handleUpdateMonth}>Mar</li>
-        <li onClick={handleUpdateMonth}>Jun</li>
-        <li onClick={handleUpdateMonth}>Aug</li>
-      </ul>
-      <FilterBar allYears ={allYears} chooseYear={chooseYear} chosenYear={chosenYear}/>
+      <Filter
+        type={'year'} 
+        allValues ={allYears} 
+        handleChange={handleUpdateYear} 
+        currentValue={year}/>
+        
+        <Filter 
+          type={'month'}
+          allValues={monthFilters}
+          handleChange={handleUpdateMonth}
+          currentValue={month}
+        />
       <section>
         {filteredPhotos.map(photo => {
-        return <ImageCard key={photo.id}cardInfo={photo} />
+        return <ImageCard key={photo.id} cardInfo={photo} />
       })}
       </section>
     </main>
