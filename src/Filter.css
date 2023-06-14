@@ -6,6 +6,7 @@
   background: linear-gradient(90deg, rgba(34,193,195,.5) 0%, rgba(253,187,45,.5) 100%); 
   padding: 0;
   line-height: .5;
+  text-align: center;
 }   
 .filter.year {
   padding-top: .2rem;
@@ -38,4 +39,25 @@
 }
 .filter.month button.selected{
   border-bottom:1px solid black;
+}
+
+@media all and (max-width:880px) {
+  .filter{
+    justify-content: center;
+  }
+  .filter.month{
+    flex-wrap:wrap;
+  }
+  .filter.month li{
+    width: 33%;
+  }
+  .filter.month button{
+    padding: .4rem;
+    padding-bottom: .1rem;
+  }
+}
+@media all and (max-width:715px){
+  .filter.year {
+    flex-wrap: wrap;
+  }
 }

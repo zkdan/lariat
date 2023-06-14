@@ -18,3 +18,20 @@ section .imageCard{
   max-width:100%;
 }
 
+@media all and (max-width:900px) {
+  section{
+    width: 96%;
+  }
+  section .imageCard{
+    width: 48%;
+    margin:0 1%;
+  }
+}
+@media all and (max-width:500px) {
+  section .imageCard{
+    width: 98%;
+    margin:0 1%;
+  }
+}
+
+

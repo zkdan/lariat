@@ -356,7 +356,16 @@ ul{
 }
 
 header{
-  text-align: center;
   letter-spacing:2rem;
   text-transform: uppercase;
+  text-align: center;
+}
+
+@media all and (max-width:600px) {
+  header{
+    letter-spacing: 1rem;
+  }
+  h1{
+    margin: 0;
+  }
 }

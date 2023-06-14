@@ -5,9 +5,8 @@ import Filter from "./Filter";
 import getMonth from "./utils.js"
 import "./ImageGrid.css";
 
-const monthFilters = ['cover', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const monthFilters = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December','cover'];
 
-// const months = ['01','02','04','05','06','07','08','09','10','11','12'];
 const  ImageGrid = () =>{
   const [allPhotos, setAllPhotos] = useState([]);
   const [allYears, setAllYears] = useState([]);
@@ -53,13 +52,16 @@ const  ImageGrid = () =>{
   },[]);
 
   const handleUpdateYear = (year)=>{
-    console.log(year)
     setMonth('all');
     setYear(year);
-    const updated =  allPhotos.filter(photo => {
-      return photo.year === year
-    });
-    setFilteredPhotos(updated);
+    if(year !== 'all'){
+      const updated =  allPhotos.filter(photo => {
+        return photo.year === year
+      });
+      setFilteredPhotos(updated);
+    } else {
+      setFilteredPhotos(allPhotos);
+    }
   }
   const handleUpdateMonth =(month)=>{
     setYear('all');
