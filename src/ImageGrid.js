@@ -1,21 +1,26 @@
 
 import { useEffect, useState } from "react";
 import ImageCard from "./ImageCard";
-import FilterBar from "./FilterBar";
+import Filter from "./Filter";
 import getMonth from "./utils.js"
 import "./ImageGrid.css";
+
+const monthFilters = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December','cover'];
 
 const  ImageGrid = () =>{
   const [allPhotos, setAllPhotos] = useState([]);
   const [allYears, setAllYears] = useState([]);
-  const [chosenYear, chooseYear] = useState([]);
+  const [year, setYear] = useState('all');
+  const [month, setMonth] = useState([]);
   const [filteredPhotos, setFilteredPhotos] = useState([]);
 
   const getAllYears = (data) => {
-    const years = new Set();
+    let years = new Set();
     data.forEach(item=>{
       years.add(item.year);
     })
+    years = Array.from(years);
+    years.unshift('all')
     setAllYears(years);
     setFilteredPhotos([]);
   }
@@ -42,29 +47,48 @@ const  ImageGrid = () =>{
       });
       setAllPhotos(data);
       getAllYears(data);
-      chooseYear('');
       setFilteredPhotos(data);
     });
   },[]);
-  useEffect(()=>{
 
-    if(chosenYear === ''){
-      setFilteredPhotos(allPhotos);
-    } else {
-      const filtered = allPhotos.filter(photo=>{
-        return photo.year === chosenYear;
+  const handleUpdateYear = (year)=>{
+    setMonth('all');
+    setYear(year);
+    if(year !== 'all'){
+      const updated =  allPhotos.filter(photo => {
+        return photo.year === year
       });
-      setFilteredPhotos(filtered);
+      setFilteredPhotos(updated);
+    } else {
+      setFilteredPhotos(allPhotos);
     }
-  },[chosenYear]);
-
+  }
+  const handleUpdateMonth =(month)=>{
+    setYear('all');
+    setMonth(month);
+    const updated =  allPhotos.filter(photo => {
+      return photo.month === month
+    });
+    setFilteredPhotos(updated);
+  }
 
   return(
     <main>
-      <FilterBar allYears ={allYears} chooseYear={chooseYear} chosenYear={chosenYear}/>
+      <Filter
+        type={'year'} 
+        allValues ={allYears} 
+        handleChange={handleUpdateYear} 
+        currentValue={year}/>
+        
+        <Filter 
+          type={'month'}
+          allValues={monthFilters}
+          handleChange={handleUpdateMonth}
+          currentValue={month}
+        />
       <section>
         {filteredPhotos.map(photo => {
-        return <ImageCard key={photo.id}cardInfo={photo} />
+        return <ImageCard key={photo.id} cardInfo={photo} />
       })}
       </section>
     </main>

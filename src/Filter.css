@@ -1,0 +1,63 @@
+.filter{
+  display: flex;
+  margin:0 auto;
+  width: 100%;
+  justify-content:space-around;
+  background: linear-gradient(90deg, rgba(34,193,195,.5) 0%, rgba(253,187,45,.5) 100%); 
+  padding: 0;
+  line-height: .5;
+  text-align: center;
+}   
+.filter.year {
+  padding-top: .2rem;
+}
+
+.filter.year button{
+  border:1px solid transparent;
+  background-color:transparent;
+  transition: ease-in-out .3s;
+  padding:.6rem;
+}
+.filter.year button.selected{
+  border:1px solid black;
+}
+
+.filter.month{
+  font-size:1rem;
+  padding:.5rem 0 .5rem 0;
+  text-transform: uppercase;
+}
+.filter.month button{
+  background-color:transparent;
+  transition: ease-in-out .3s;
+  border:none;
+  border-bottom:1px solid transparent;
+  font-size: .6rem;
+  padding-bottom:.1rem;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+.filter.month button.selected{
+  border-bottom:1px solid black;
+}
+
+@media all and (max-width:880px) {
+  .filter{
+    justify-content: center;
+  }
+  .filter.month{
+    flex-wrap:wrap;
+  }
+  .filter.month li{
+    width: 33%;
+  }
+  .filter.month button{
+    padding: .4rem;
+    padding-bottom: .1rem;
+  }
+}
+@media all and (max-width:715px){
+  .filter.year {
+    flex-wrap: wrap;
+  }
+}
