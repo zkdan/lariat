@@ -1,13 +1,17 @@
 .filter{
   display: flex;
+  flex-wrap:wrap;
   margin:0 auto;
   width: 100%;
   justify-content:space-around;
-  background: linear-gradient(90deg, rgba(34,193,195,.5) 0%, rgba(253,187,45,.5) 100%); 
+  background: linear-gradient(90deg, rgba(34,193,195,.5) 0%, rgba(253,187,45,.5) 100%);
   padding: 0;
   line-height: .5;
   text-align: center;
 }   
+.grayscale .filter{
+  background: linear-gradient(90deg, rgb(81, 81, 81) 0%, rgb(217, 216, 216) 100%);
+}
 .filter.year {
   padding-top: .2rem;
 }
@@ -44,9 +48,6 @@
 @media all and (max-width:880px) {
   .filter{
     justify-content: center;
-  }
-  .filter.month{
-    flex-wrap:wrap;
   }
   .filter.month li{
     width: 33%;

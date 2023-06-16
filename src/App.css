@@ -39,8 +39,8 @@ main {
  */
 
 h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
+  font-size: 2rem;
+  margin: 0.67rem 0;
 }
 
 /* Grouping content
@@ -356,15 +356,42 @@ ul{
 }
 
 header{
-  letter-spacing:2rem;
+  letter-spacing:4vw;
   text-transform: uppercase;
   text-align: center;
 }
 
+.toggle{
+  position: relative;
+  left:.5rem;
+  padding: .4rem .9rem;
+  border: 1px solid black;
+  border-radius: 1rem;
+  background-color: white;
+  transition:all .3s ease-in-out;
+  font-size:.5rem;
+}
+.toggle:focus{
+  background-color: lightgray;  
+  outline:none;
+}
+.toggle::before{
+  transition:all .3s ease-in-out;
+  content:'🤡';
+  left:4px;
+  right:100%;
+  top:3px;
+  position: absolute;
+}
+.grayscale .toggle{
+  background-color: lightgray;
+}
+.grayscale .toggle::before{
+  right:-.8rem;
+  font-size:.5rem;
+  content:'👽';
+}
 @media all and (max-width:600px) {
-  header{
-    letter-spacing: 1rem;
-  }
   h1{
     margin: 0;
   }
