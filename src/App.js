@@ -1,9 +1,8 @@
 import './App.css';
 import ImageGrid from './ImageGrid';
 
-
 function App() {
-  
+
   return (
     <div className="App">
       <header>

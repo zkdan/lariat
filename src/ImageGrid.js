@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import ImageCard from "./ImageCard";
 import Filter from "./Filter";
+import Modal from './Modal';
 import getMonth from "./utils.js"
 import "./ImageGrid.css";
 
@@ -11,9 +12,10 @@ const  ImageGrid = () =>{
   const [allPhotos, setAllPhotos] = useState([]);
   const [allYears, setAllYears] = useState([]);
   const [year, setYear] = useState('all');
-  const [month, setMonth] = useState([]);
+  const [month, setMonth] = useState('');
   const [filteredPhotos, setFilteredPhotos] = useState([]);
-
+  const [modal, setModal] = useState(false);
+  const [selectedPhoto, setSelectedPhoto] = useState('');
   const getAllYears = (data) => {
     let years = new Set();
     data.forEach(item=> {
@@ -35,9 +37,11 @@ const  ImageGrid = () =>{
         const year = item.name.slice(0,4);
         const name = item.name;
         const trimPoint = item.id.lastIndexOf('/');
-        const imageUrl = `${baseUrl}${item.id.slice(0,trimPoint)}`;
+        const thumbUrl = `${baseUrl}${item.id.slice(0,trimPoint)}`;
+        const fullUrl = thumbUrl.replace('thumb', 'full');
         const photoSpecs = {
-          imageUrl,
+          thumbUrl,
+          fullUrl,
           name,
           id:item.generation,
           month,
@@ -71,15 +75,33 @@ const  ImageGrid = () =>{
     });
     setFilteredPhotos(updated);
   }
+  const handleImageClick =(x)=>{
+    setSelectedPhoto(x);
+    setModal(true);
+  }
+  const handleCloseModal =(e)=>{
+    console.log(e)
+    setModal(false);
+  }
+  const handleNext =()=>{
 
+  }
   return(
-    <main>
+    <main className={modal ?'no-scroll' : ''}>
+      {modal && selectedPhoto && 
+      <Modal 
+        url={selectedPhoto}
+        close={handleCloseModal}
+        // next={}
+        // last={}
+      />
+      
+      }
       <Filter
         type={'year'} 
         allValues ={allYears} 
         handleChange={handleUpdateYear} 
         currentValue={year}/>
-        
         <Filter 
           type={'month'}
           allValues={monthFilters}
@@ -88,7 +110,10 @@ const  ImageGrid = () =>{
         />
       <section>
         {filteredPhotos.map(photo => {
-        return <ImageCard key={photo.id} cardInfo={photo} />
+        return <ImageCard 
+                  key={photo.id} 
+                  cardInfo={photo} 
+                  handleClick={handleImageClick}/>
       })}
       </section>
     </main>
