@@ -10,10 +10,16 @@
   align-items: center;
   justify-items:center;
 }
+.modal button {
+  position: absolute;
+  top:0;
+  right:0;
+}
 .modal img{
   max-width: 100%;
   border:1px solid black;
   width: 80%;
-  /* height:calc(100vh - 10%); */
   max-height:100vh;
+  max-width:3300px;
+  max-height:2550px;
 }
