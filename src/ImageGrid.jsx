@@ -7,7 +7,6 @@ import getMonth from "./utils.js"
 import "./ImageGrid.css";
 
 const monthFilters = ['Cover','January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
 const  ImageGrid = () =>{
   const [allPhotos, setAllPhotos] = useState([]);
   const [allYears, setAllYears] = useState([]);
@@ -55,7 +54,6 @@ const  ImageGrid = () =>{
 
     const handleEvent = (e) => {
       const element = modalRef.current;
-   
       if(element && element === e.target){
         setModal(false);
       }
