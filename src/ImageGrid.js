@@ -76,13 +76,13 @@ const  ImageGrid = () =>{
     setFilteredPhotos(updated);
   }
   const handleImageClick =(x)=>{
-    setSelectedPhoto(x);
+    setSelectedPhoto(allPhotos[allPhotos.indexOf(x)]);
     setModal(true);
   }
   const handleCloseModal =(e)=>{
-    console.log(e)
     setModal(false);
   }
+
   const handleNext =()=>{
 
   }
