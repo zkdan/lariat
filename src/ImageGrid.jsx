@@ -65,6 +65,22 @@ const  ImageGrid = () =>{
       if(e.keyCode === 32 && isImageCard){
         handleImageClick(e.target.id)
       }
+      const leftArrow = e.keyCode ===37;
+      const rightArrow = e.keyCode === 39;
+      if(leftArrow || rightArrow){
+        if(modal){
+          let curr = allPhotos.filter(photo=>{
+            return photo.id === selectedPhoto.id
+          });
+          curr = allPhotos.indexOf(curr[0]);
+          if(rightArrow){
+            setSelectedPhoto(allPhotos[curr +1])
+          }
+          if(leftArrow){
+            setSelectedPhoto(allPhotos[curr -1])
+          }
+        }
+      }
     }
     document.addEventListener("mousedown", handleEvent);
     document.addEventListener("touchstart", handleEvent);
@@ -103,9 +119,6 @@ const  ImageGrid = () =>{
     setSelectedPhoto(null);
   }
 
-  const handleNext =()=>{
-  }
-
   return(
     <main>
       {modal && selectedPhoto && 
@@ -114,8 +127,7 @@ const  ImageGrid = () =>{
         url={selectedPhoto.fullUrl}
         close={handleCloseModal}
         isOpen={modal}
-        // next={}
-        // last={}
+        title={`${selectedPhoto.month} ${selectedPhoto.year}`}
       />
       }
       <Filter
