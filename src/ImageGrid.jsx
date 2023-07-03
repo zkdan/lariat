@@ -113,8 +113,8 @@ const  ImageGrid = () =>{
     setSelectedPhoto(selected[0]);
     setModal(true);
   }
+  
   const handleCloseModal =(e)=>{
-
     setModal(false);
     setSelectedPhoto(null);
   }

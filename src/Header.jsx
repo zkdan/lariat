@@ -5,8 +5,10 @@ const Header = ({text}) => {
 return(
 <header>
         <h1>{
-          text.map(letter =>{
-            return <span className="letter">{letter}</span>
+          text.map((letter,i) =>{
+            return <span 
+            key={`${letter+ i}`}
+            className="letter">{letter}</span>
           })
         }</h1>
       </header>
