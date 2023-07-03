@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import {forwardRef} from "react";
+import { useEffect, forwardRef } from "react";
 import './Modal.css'
 
 const Modal = forwardRef(function Modal({url, close, title}, ref){
@@ -19,10 +18,11 @@ const Modal = forwardRef(function Modal({url, close, title}, ref){
     <div ref={ref}
     className="modal" 
     >
-     <button autoFocus tabIndex={1} onClick={(e)=>close(e)}>x</button>
-      <p>{title}</p>
-      <img src={url} alt="" />
-      
+      <div className="container">
+        <button autoFocus tabIndex={1} onClick={(e)=>close(e)}></button>
+        <p>{title}</p>
+        <img src={url} alt={title} />
+      </div>
     </div>
 )
 })

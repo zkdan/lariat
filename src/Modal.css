@@ -11,16 +11,40 @@
   align-items: center;
   justify-items:center;
 }
+.container{
+  position: relative;
+  text-align: center;
+  width: 90%;
+}
+.modal p{
+  /* width: 100%; */
+  margin: 0;
+  padding-bottom:1rem;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  font-size: .8rem;
+  color:rgb(175, 172, 172);
+  text-align: left;
+}
 .modal button {
   position: absolute;
-  top:0;
   right:0;
+  background-image: url('../public/x.png');
+  background-color: transparent;
+  border:none;
+  height: .8rem;
+  width: .8rem;
+  background-size:cover;
 }
+
 .modal img{
-  max-width: 100%;
+  width: 100%;
   border:1px solid black;
-  width: 80%;
-  max-height:100vh;
-  max-width:3300px;
-  max-height:2550px;
+}
+
+/* landscape-ish */
+@media (min-aspect-ratio: 22/17) {
+  .modal .container{
+    width:calc(22/17 * 80vh);
+  }
 }

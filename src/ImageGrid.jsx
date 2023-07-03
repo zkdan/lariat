@@ -118,7 +118,25 @@ const  ImageGrid = () =>{
     setModal(false);
     setSelectedPhoto(null);
   }
-
+  const filteredPhotos = allPhotos
+  .filter(photo => {
+    if(year && month){
+      return photo.year === year && photo.month === month
+    }
+    return photo
+  })
+  .filter(photo =>{
+    if(year){
+      return photo.year === year
+    }
+    return photo
+  })
+  .filter(photo =>{
+    if(month){
+      return photo.month === month
+    }
+    return photo
+  });
   return(
     <main>
       {modal && selectedPhoto && 
@@ -143,32 +161,13 @@ const  ImageGrid = () =>{
           currentValue={month}
         />
       <section>
-        {allPhotos
-        .filter(photo => {
-          if(year && month){
-            return photo.year === year && photo.month === month
-          }
-          return photo
-        })
-        .filter(photo =>{
-          if(year){
-            return photo.year === year
-          }
-          return photo
-        })
-        .filter(photo =>{
-          if(month){
-            return photo.month === month
-          }
-          return photo
-        })
-        .map(photo =>{
+        {filteredPhotos.length ? filteredPhotos.map(photo =>{
           return <ImageCard 
           ref={imgRef}
           key={photo.id} 
           cardInfo={photo} 
           handleClick={handleImageClick}/>
-        })
+        }) : <p className="empty-message">sorry, nothing here for that one</p>
         }
       </section>
     </main>
