@@ -1,9 +1,7 @@
 .modal{
   position: absolute;
-  top:0;
-  left:0;
-  bottom:0;
-  right:0;
+  height:100vh;
+  width: 100%;
   background-color: rgba(255,255,255,.9);
   display: flex;
   flex-direction:column;
@@ -13,24 +11,24 @@
 }
 .container{
   position: relative;
-  text-align: center;
   width: 90%;
 }
 .modal p{
-  /* width: 100%; */
   margin: 0;
   padding-bottom:1rem;
   text-transform: uppercase;
   letter-spacing: -2px;
   font-size: .8rem;
   color:rgb(175, 172, 172);
-  text-align: left;
+  display: inline-block;
 }
 .modal button {
   position: absolute;
   right:0;
+  top:5px;
   background-image: url('../public/x.png');
   background-color: transparent;
+  filter: opacity(0.3);
   border:none;
   height: .8rem;
   width: .8rem;

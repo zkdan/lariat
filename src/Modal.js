@@ -9,8 +9,11 @@ const Modal = forwardRef(function Modal({url, close, title}, ref){
   }
   useEffect(()=>{
     document.addEventListener("keydown", handleKeydown);
+    document.querySelector('body').classList.add('no-scroll');
     return()=>{
       document.removeEventListener("keydown", handleKeydown);
+      document.querySelector('body').classList.remove('no-scroll');
+
     }
   })
   
