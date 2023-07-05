@@ -1,14 +1,11 @@
 import './App.css';
 import ImageGrid from './ImageGrid';
-
-
+import Header from './Header';
 function App() {
-  
+
   return (
     <div className="App">
-      <header>
-        <h1>lariat</h1>
-      </header>
+      <Header text={"lariat"}/>
       <ImageGrid/>
     </div>
   );

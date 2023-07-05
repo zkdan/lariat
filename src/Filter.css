@@ -41,7 +41,7 @@
   border-bottom:1px solid black;
 }
 
-@media all and (max-width:880px) {
+@media all and (max-width:900px) {
   .filter{
     justify-content: center;
   }
@@ -55,9 +55,16 @@
     padding: .4rem;
     padding-bottom: .1rem;
   }
-}
-@media all and (max-width:715px){
   .filter.year {
     flex-wrap: wrap;
+  }
+  .filter.year li {
+    width: 20%;
+  }
+}
+
+@media all and (max-width:490px) {
+  .filter.year button {
+    padding: 7%;
   }
 }

@@ -1,6 +1,9 @@
 export default function getMonth(number){
  let name = null;
 switch(number){
+  case 'co':
+    name = 'Cover'
+      break;
   case '01':
        name = 'January'
        break;
@@ -37,9 +40,6 @@ switch(number){
       case '12':
         name =  'December'
         break; 
-      case 'co':
-      name = 'cover'
-        break;
       default:
         name =  ''
   }
