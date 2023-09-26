@@ -36,11 +36,11 @@ const  ImageGrid = () =>{
         const year = item.name.slice(0,4);
         const name = item.name;
         const trimPoint = item.id.lastIndexOf('/');
-        const thumbUrl = `${baseUrl}${item.id.slice(0,trimPoint)}`;
-        const fullUrl = thumbUrl.replace('thumb', 'full');
+        const miniUrl = `${baseUrl}${item.id.slice(0,trimPoint)}`;
+        const thumbUrl = miniUrl.replace('mini', 'thumb');
         const photoSpecs = {
+          miniUrl,
           thumbUrl,
-          fullUrl,
           name,
           id:item.generation,
           month,
