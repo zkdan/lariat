@@ -30,7 +30,7 @@ const  ImageGrid = () =>{
     fetch('https://storage.googleapis.com/storage/v1/b/lariat-images/o/')
     .then(res=> res.json())
     .then(res => {
-      const data = res.items.filter(item => item.name.includes('thumb')).map(item => {
+      const data = res.items.filter(item => item.name.includes('mini')).map(item => {
         const baseUrl = `https://storage.googleapis.com/`;
         const month = getMonth(item.name.slice(5,7));
         const year = item.name.slice(0,4);
