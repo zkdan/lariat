@@ -67,11 +67,11 @@ const  ImageGrid = () =>{
       }
       const leftArrow = e.keyCode ===37;
       const rightArrow = e.keyCode === 39;
+      let curr = allPhotos.filter(photo=>{
+        return photo.id === selectedPhoto.id
+      });
       if(leftArrow || rightArrow){
         if(modal){
-          let curr = allPhotos.filter(photo=>{
-            return photo.id === selectedPhoto.id
-          });
           curr = allPhotos.indexOf(curr[0]);
           if(rightArrow){
             setSelectedPhoto(allPhotos[curr +1])
