@@ -1,7 +1,7 @@
 import {forwardRef } from "react";
 
 const ImageCard = forwardRef(function ImageCard({cardInfo, handleClick}, ref){
-  const {month, thumbUrl, name, year, id} = cardInfo;
+  const {month, miniUrl, name, year, id} = cardInfo;
 return(
   <div ref={ref}
   id={id}
@@ -9,7 +9,7 @@ return(
       tabIndex={1} 
       onClick={() => handleClick(id)}>
     <p>{month} {year}</p>
-    <img src={thumbUrl} alt={name} />
+    <img src={miniUrl} alt={name} />
   </div>
 )
 })
