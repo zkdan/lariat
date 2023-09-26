@@ -142,7 +142,7 @@ const  ImageGrid = () =>{
       {modal && selectedPhoto && 
       <Modal 
         ref={modalRef}
-        url={selectedPhoto.fullUrl}
+        url={selectedPhoto.thumbUrl}
         close={handleCloseModal}
         isOpen={modal}
         title={`${selectedPhoto.month} ${selectedPhoto.year}`}
